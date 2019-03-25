@@ -476,7 +476,7 @@ void AddClosedList() // adds the "best" tile to the closedList
   byte rowa, cola;
 
   closedList[cLN++] = low;
-  path[pN] = low;
+  //path[pN] = low;
   rowa = (byte)low/10;
   cola = low%10;
   PF.Map[rowa][cola].index = 1;
