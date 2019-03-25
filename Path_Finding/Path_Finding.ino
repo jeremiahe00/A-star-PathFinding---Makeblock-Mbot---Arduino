@@ -256,7 +256,7 @@ void setGoal() // asks user for input to set the goal state/tile
         PF.Map[i][k].index = 1;
         curBotPos = PF.Map[i][k].gridNom;
       }
-      else if (PF.Map[i][k].gridNom == 26 || PF.Map[i][k].gridNom == 32 || PF.Map[i][k].gridNom == 64 || PF.Map[i][k].gridNom == 71 || PF.Map[i][k].gridNom == 77)
+      else if (PF.Map[i][k].gridNom == 22 || PF.Map[i][k].gridNom == 32 || PF.Map[i][k].gridNom == 61 || PF.Map[i][k].gridNom == 81 || PF.Map[i][k].gridNom == 77)
       {
         PF.Map[i][k].index = 2;
       }
@@ -575,6 +575,7 @@ void movement() // performs the actual robots movement according to the path cho
     else if (closedList[index] == parm + 1)
     {
       botM[bM++] = 'r';
+      delay(500);
       rightturn();
       delay(500);
       forward();
@@ -593,6 +594,9 @@ void movement() // performs the actual robots movement according to the path cho
       delay(500);
       backwards();
       delay(500);
+    }
+    else {
+      delay(159);
     }
   }
   
@@ -619,7 +623,7 @@ void leftturn() // turns the robot left
   while (millis() < time+1000)
   {
     //move(4, 300);
-    motor_10.run((10)==M1?-(130):(130));
+    motor_10.run((10)==M1?-(126.5):(126.5));
     Serial.println('l');
     if (millis() > time+1000)
     {
@@ -636,7 +640,7 @@ void rightturn() // turns the robot right
   while (millis() < time+1000)
   {
     //move(4, 300);
-    motor_9.run((9)==M1?-(130):(130));
+    motor_9.run((9)==M1?-(126.5):(126.5));
     Serial.println('r');
     if (millis() > time+1000)
     {
