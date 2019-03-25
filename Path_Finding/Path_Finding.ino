@@ -251,7 +251,7 @@ void setGoal() // asks user for input to set the goal state/tile
         PF.Map[i][k].index = 3;
         goalN = PF.Map[i][k].gridNom;
       }
-      if (PF.Map[i][k].gridNom == 45)
+      else if (PF.Map[i][k].gridNom == 45)
       {
         PF.Map[i][k].index = 1;
         curBotPos = PF.Map[i][k].gridNom;
