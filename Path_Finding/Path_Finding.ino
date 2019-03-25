@@ -105,7 +105,7 @@ void setup(){ // sets up the program, builds the map, prints the grid for repres
 
 }
 
-void loop(){ // the "main" program
+void loop(){ // checks if the goal tile has been found
   if (!isGoal(curBotPos) && OLE)
   {
     _loop(); // the actual performance of the A* algorithm
@@ -134,7 +134,7 @@ void _delay(float seconds){
     while(millis() < endTime)_loop();
 }
 
-void _loop(){ // performs the A* algorithm
+void _loop(){ // performs the A* algorithm, "main" program
   possMov(curBotPos);
   for (byte i = 0; i < oLN; i++)
   {
