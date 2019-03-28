@@ -7,12 +7,12 @@
 
 byte goalN; // goal position on grid
 //byte path[75]; byte pN=0 
-byte openList[50]; // contains all the possible paths
-byte closedList[25]; // contains the path taken
+byte openList[100]; // contains all the possible paths
+byte closedList[100]; // contains the path taken
 byte oLN=0, cLN=0, bM=0; // the counters for the openList, closedList and the bot's movement
 bool gFound = false, openLEmpty = false, isMoved = false;
 byte curBotPos; // holds current bot position
-char botM[15]; // contains the specific moves the bot should take to reach its goal
+char botM[75]; // contains the specific moves the bot should take to reach its goal
 
 struct Node
 {
@@ -256,7 +256,7 @@ void setGoal() // asks user for input to set the goal state/tile
         PF.Map[i][k].index = 1;
         curBotPos = PF.Map[i][k].gridNom;
       }
-      else if (PF.Map[i][k].gridNom == 22 || PF.Map[i][k].gridNom == 32 || PF.Map[i][k].gridNom == 61 || PF.Map[i][k].gridNom == 81 || PF.Map[i][k].gridNom == 44)
+      else if (PF.Map[i][k].gridNom == 22 || PF.Map[i][k].gridNom == 32 || PF.Map[i][k].gridNom == 61 || PF.Map[i][k].gridNom == 81 || PF.Map[i][k].gridNom == 77)
       {
         PF.Map[i][k].index = 2;
       }
@@ -557,47 +557,46 @@ void movement() // performs the actual robots movement according to the path cho
     if (closedList[index] == parm - 10)
     {
       botM[bM++] = 'u';
-      //delay(1000);
+      delay(500);
       forward();
-      //delay(1000);
+      delay(500);
     }
     else if (closedList[index] == parm - 1)
     {
       botM[bM++] = 'l';
-      //delay(1000);
+      delay(500);
       leftturn();
-      //delay(1000);
+      delay(500);
       forward(); 
-      //delay(1000);
+      delay(500);
       rightturn();
-      //delay(1000);
+      delay(500);
     }
     else if (closedList[index] == parm + 1)
     {
       botM[bM++] = 'r';
-      //delay(1000);
+      delay(500);
       rightturn();
-      //delay(1000);
+      delay(500);
       forward();
-      //delay(1000);
+      delay(500);
       leftturn();
-      //delay(1000);
+      delay(500);
       
     }
     else if (closedList[index] == parm + 10)
     {
       botM[bM++] = 'd';
-      //delay(1000);
+      delay(500);
       backwards();
-      //delay(1000);
+      delay(500);
       forward();
-      //delay(1000);
+      delay(500);
       backwards();
-      //delay(1000);
+      delay(500);
     }
     else {
-      delay(750);
-      Serial.println("whoops");
+      delay(159);
     }
   }
   
@@ -606,32 +605,25 @@ void movement() // performs the actual robots movement according to the path cho
 
 void forward() // moves the robot forward
 {
-  delay(1000);
   unsigned long time = millis();
   while (millis() < time+1500)
   {
-    move(1, 150);
-    //motor_10.run((10)==M1?-(91):(91));
-    //motor_9.run((9)==M1?-(100):(100));
+    move(1, 200);
     Serial.println('f');
     if (millis() > time+1500)
     {
       move(1, 0);
-      //motor_10.run((10)==M1?-(0):(0));
-      //motor_9.run((9)==M1?-(0):(0));
     }
   }
-  delay(1000);
 }
 
 void leftturn() // turns the robot left
 {
-  delay(1000);
   unsigned long time = millis();
   while (millis() < time+1000)
   {
     //move(4, 300);
-    motor_10.run((10)==M1?-(133.5):(133.5));
+    motor_10.run((10)==M1?-(126.5):(126.5));
     Serial.println('l');
     if (millis() > time+1000)
     {
@@ -639,17 +631,16 @@ void leftturn() // turns the robot left
       motor_10.run((10)==M1?-(0):(0));
     }
   }
-  delay(1000);
+  //forward();
 }
 
 void rightturn() // turns the robot right
 {
-  delay(1000);
   unsigned long time = millis();
   while (millis() < time+1000)
   {
     //move(4, 300);
-    motor_9.run((9)==M1?-(134):(134));
+    motor_9.run((9)==M1?-(126.5):(126.5));
     Serial.println('r');
     if (millis() > time+1000)
     {
@@ -657,14 +648,11 @@ void rightturn() // turns the robot right
       motor_9.run((9)==M1?-(0):(0));
     }
   }
-  delay(1000); 
+  //forward(); 
 }
 
 void backwards() // turns the robot around
 {
-  delay(500);
   rightturn();
-  delay(500);
   rightturn();
-  delay(500);
 }
